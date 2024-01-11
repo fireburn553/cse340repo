@@ -1,0 +1,97 @@
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Layout */
+
+/* Header */
+.siteName, #tools{
+  /* ... */
+}
+
+#tools{
+
+}
+
+/* Navigation */
+nav{
+  background-color: #365486;
+}
+
+nav ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  padding: 0.75rem;
+}
+
+nav ul li {
+  display: block;
+  color: white;
+  padding: .5rem 0;
+  text-decoration: none;
+  font-size: .9rem;
+  text-align: center;
+}
+
+
+
+/* Body */
+#homeTitle{
+  font-size: 1.5rem;
+}
+
+section.hero{
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+section.hero div.hero-image{
+  grid-column: 1/4;
+  grid-row: 1/5;
+}
+
+section.hero div.hero-image picture.heroImage img{
+  width: 100%;
+}
+
+#hero-content-wrapper{
+  background-color: aqua;
+  grid-column: 1/2;
+  grid-row: 1/3;
+}
+
+div.hero-btn{
+  margin: auto;
+  font-size: 1.5rem;
+}
+
+div.hero-header h1, div.hero-header p{
+  margin: 0;
+}
+
+div.upgrades-section{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  grid-gap: 10px;
+}
+
+.u{
+  width: 100%;
+  text-align: center;
+}
+
+.upgradeImg{
+  background-color: aqua;
+  padding: 10px;
+}
+
+
+/* Footer */
