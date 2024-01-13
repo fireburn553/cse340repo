@@ -5,15 +5,37 @@
   box-sizing: border-box;
 }
 
+*{
+  font-family: 'Arial';
+}
+
 /* Layout */
 
 /* Header */
-.siteName, #tools{
-  /* ... */
+#top-header{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
+
+}
+.siteName{
+  grid-row: 1/3;
+  grid-column: 1/3;
+  font-size: 30px;
 }
 
-#tools{
+#acct-btn{
+  grid-column: 4/5;
+  text-align: right;
+}
 
+.siteName a{
+  font-weight: bold;
+}
+
+.siteName a, #acct-btn a{
+  text-decoration: none;
+  color: #365486;
 }
 
 /* Navigation */
@@ -28,7 +50,7 @@ nav ul{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
-  padding: 0.75rem;
+  padding: 0.5rem;
 }
 
 nav ul li {
@@ -43,6 +65,11 @@ nav ul li {
 
 
 /* Body */
+
+.content{
+  max-width: 405px;
+  margin: auto;
+}
 #homeTitle{
   font-size: 1.5rem;
 }
@@ -50,6 +77,8 @@ nav ul li {
 section.hero{
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
+  max-width: 450px;
+  margin: auto;
 }
 
 section.hero div.hero-image{
@@ -62,9 +91,10 @@ section.hero div.hero-image picture.heroImage img{
 }
 
 #hero-content-wrapper{
-  background-color: aqua;
+  background-color: #dcf2f1b5;
   grid-column: 1/2;
   grid-row: 1/3;
+  width: fit-content;
 }
 
 div.hero-btn{
@@ -72,8 +102,17 @@ div.hero-btn{
   font-size: 1.5rem;
 }
 
-div.hero-header h1, div.hero-header p{
+div.hero-btn button{
+  background: #365486;
+  color: whitesmoke;
+  border-radius: 5px;
+  font-size: 1em;
+  padding: 10px;
+}
+
+div.hero-header h2, div.hero-header p{
   margin: 0;
+  padding: 2px;
 }
 
 div.upgrades-section{
@@ -83,14 +122,33 @@ div.upgrades-section{
   grid-gap: 10px;
 }
 
+div.first-content ul{
+  padding-left: 20px;
+}
+
+div.first-content ul li{
+  padding-left: 10px;
+  padding-top: 20px;
+}
+
+
 .u{
   width: 100%;
   text-align: center;
 }
 
 .upgradeImg{
-  background-color: aqua;
+  background-color: #dcf2f1;
   padding: 10px;
+  border: 1px solid #365486;
+}
+
+#upgradeOneContent div.upgradeImg, #upgradeThreeContent div.upgradeImg{
+  padding-top: 28px;
+} 
+
+#upgradeFourContent div.upgradeImg{
+  padding-top: 24px;
 }
 
 
