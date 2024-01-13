@@ -8,6 +8,7 @@
 *{
   font-family: 'Arial';
 }
+
 /* Layout */
 
 /* Header */
@@ -49,7 +50,7 @@ nav ul{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
-  padding: 0.75rem;
+  padding: 0.5rem;
 }
 
 nav ul li {
@@ -64,6 +65,11 @@ nav ul li {
 
 
 /* Body */
+
+.content{
+  max-width: 405px;
+  margin: auto;
+}
 #homeTitle{
   font-size: 1.5rem;
 }
@@ -71,6 +77,8 @@ nav ul li {
 section.hero{
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
+  max-width: 450px;
+  margin: auto;
 }
 
 section.hero div.hero-image{
@@ -98,7 +106,7 @@ div.hero-btn button{
   background: #365486;
   color: whitesmoke;
   border-radius: 5px;
-  font-size: 4vw;
+  font-size: 1em;
   padding: 10px;
 }
 
@@ -117,6 +125,12 @@ div.upgrades-section{
 div.first-content ul{
   padding-left: 20px;
 }
+
+div.first-content ul li{
+  padding-left: 10px;
+  padding-top: 20px;
+}
+
 
 .u{
   width: 100%;
