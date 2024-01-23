@@ -175,6 +175,7 @@ div.first-content ul li{
   list-style: none;
   display: grid;
   grid-template-rows: 1fr 1fr;
+  border-radius: 5px;
 }
 #inv-display li div.namePrice{
   display: inline-block; /* or inline if the content is short and you want it to stay on one line */
