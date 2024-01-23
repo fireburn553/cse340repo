@@ -48,18 +48,28 @@ nav ul{
   padding: 0;
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1fr;
   padding: 0.5rem;
+  
 }
 
-nav ul li {
+nav ul li a:link{
+  text-decoration: none;
+}
+
+nav ul li a{
   display: block;
-  color: white;
   padding: .5rem 0;
   text-decoration: none;
   font-size: .9rem;
   text-align: center;
+  color: white;
+}
+
+nav ul li a:hover{
+  background-color: white;
+  color: #365486;
 }
 
 
@@ -149,6 +159,41 @@ div.first-content ul li{
 
 #upgradeFourContent div.upgradeImg{
   padding-top: 24px;
+}
+
+  /* Inventory Display */
+#inv-display{
+  display: block;
+  margin: 0 auto;
+}
+
+#inv-display li{
+  justify-self: center;
+  max-width: 200px;
+  border: 2px solid #365486;
+  max-height: 100%;
+  list-style: none;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+#inv-display li div.namePrice{
+  display: inline-block; /* or inline if the content is short and you want it to stay on one line */
+  text-align: center;
+}
+
+
+#inv-display li div.namePrice h2{
+  margin: auto;
+  padding: 10px;
+  font-size: 1em;
+}
+
+#inv-display li div.namePrice span{
+  margin: auto;
+}
+
+#inv-display li div.namePrice hr{
+  border: 1px solid black;
 }
 
 
