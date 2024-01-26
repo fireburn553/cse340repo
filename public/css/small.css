@@ -163,8 +163,9 @@ div.first-content ul li{
 
   /* Inventory Display */
 #inv-display{
-  display: block;
+  display: grid;
   margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
 }
 
 #inv-display li{
@@ -176,6 +177,11 @@ div.first-content ul li{
   display: grid;
   grid-template-rows: 1fr 1fr;
   border-radius: 5px;
+  margin: 10px;
+}
+
+#inv-display li a img{
+  max-width: 100%;
 }
 #inv-display li div.namePrice{
   display: inline-block; /* or inline if the content is short and you want it to stay on one line */
