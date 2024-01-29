@@ -232,5 +232,14 @@ div#details-page div.car-details{
   border-radius: 10px;
 }
 
+#error-message, #error-message-header{
+  text-align: center;
+}
+
+.error-img{
+  max-width: 100%;
+}
+
+
 
 /* Footer */
