@@ -225,7 +225,7 @@ div#details-page div.details-images img{
 div#details-page div.car-details{
   max-width: 500px;
   justify-content: center;
-  margin: 10px;
+  margin: auto;
   padding: 10px;
   background-color: #365486;
   color: white;
