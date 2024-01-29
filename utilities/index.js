@@ -74,7 +74,7 @@ Util.buildInventoryDetailsGrid = async function(data){
     grid += '<p> <strong> Price: $</strong>' + new Intl.NumberFormat('en-US').format(vehicle.inv_price)+'</p>'
     grid += '<p><strong> Description: </strong>' + vehicle.inv_description + '</p>'
     grid += '<p><strong> Color: </strong>' + vehicle.inv_color + '</p>'
-    grid += '<p><strong> Miles: </strong>' + vehicle.inv_miles + '</p></div>'
+    grid += '<p><strong> Miles: </strong>' + vehicle.inv_miles.toLocaleString('en-US') + '</p></div>'
     grid += '</div>'
   }else{
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
