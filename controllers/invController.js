@@ -31,4 +31,18 @@ invCont.buildByInventoryId = async function (req, res, next) {
     grid,
   })
 }
+
+invCont.buildErrorPage = async function (req, res, next){
+  const inventory_id = req.params.inventoryId
+  const data = await invModel.getDetailsByInventoryId(inventory_id)
+  const grid = await utilities.buildInventoryDetailsGrid(data)
+  //let nav = await utilities.getNav()
+  res.render("./inventory/details", {
+    title:" ",
+    nav,
+    grid,
+  })
+}
+
 module.exports = invCont
+
