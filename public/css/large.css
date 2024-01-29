@@ -72,5 +72,9 @@
     justify-content: center;
     
   }
-
+  
+  div#details-page{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 } 
