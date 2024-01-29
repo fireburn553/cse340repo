@@ -203,5 +203,34 @@ div.first-content ul li{
   border: 1px solid black;
 }
 
+/* Inventory Details */
+div#details-page{
+  background-color: #dcf2f1;
+  border-radius: 10px;
+}
+
+div#details-page div.details-images{
+  max-width: 500px;
+  margin: auto;
+  padding: 10px;
+}
+
+div#details-page div.details-images img{
+  max-width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  
+}
+
+div#details-page div.car-details{
+  max-width: 500px;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  background-color: #365486;
+  color: white;
+  border-radius: 10px;
+}
+
 
 /* Footer */

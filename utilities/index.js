@@ -67,15 +67,14 @@ Util.buildInventoryDetailsGrid = async function(data){
   let vehicle = data[0]
   if (vehicle){
     grid = '<div id="details-page">'
-    grid += '<h2>'+ vehicle.inv_make + ' '+ vehicle.inv_model +' '+ vehicle.inv_year+'</h2>'
     grid += '<div class="details-images"> <img src="' + vehicle.inv_image
     +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-    +' on CSE Motors" /></div>'
-    grid += '<div class="car-details"><h3>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details</h3>'
-    grid += '<p>' + vehicle.inv_price + '</p>'
-    grid += '<p>' + vehicle.inv_description + '</p>'
-    grid += '<p>' + vehicle.inv_color + '</p>'
-    grid += '<p>' + vehicle.inv_miles + '</p></div>'
+    +' on CSE Motors"></div>'
+    grid += '<div class="car-details"><h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details</h2>'
+    grid += '<p> <strong> Price: $</strong>' + new Intl.NumberFormat('en-US').format(vehicle.inv_price)+'</p>'
+    grid += '<p><strong> Description: </strong>' + vehicle.inv_description + '</p>'
+    grid += '<p><strong> Color: </strong>' + vehicle.inv_color + '</p>'
+    grid += '<p><strong> Miles: </strong>' + vehicle.inv_miles + '</p></div>'
     grid += '</div>'
   }else{
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
