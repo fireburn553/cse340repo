@@ -8,5 +8,7 @@ const util = require("../utilities/")
 router.get("/login", util.handleErrors(accountController.buildLogin))
 // Route to build registration view
 router.get("/register", util.handleErrors(accountController.buildRegister))
+// Route to post registration activity 
+router.post("/register", util.handleErrors(accountController.registerAccount))
 
 module.exports = router;
