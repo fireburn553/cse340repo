@@ -29,6 +29,12 @@
   text-align: right;
 }
 
+#acct-btn a:hover{
+  background-color: #365486;
+  color: #ffffff;
+  padding: 2px;
+}
+
 .siteName a{
   font-weight: bold;
 }
