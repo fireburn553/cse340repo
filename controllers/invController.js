@@ -1,6 +1,5 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
-
 const invCont = {}
 
 /* ***************************
@@ -42,6 +41,48 @@ invCont.buildErrorPage = async function (req, res, next){
     nav,
     grid,
   })
+}
+
+invCont.buildManagementView = async function(req, res, next){
+  let nav = await utilities.getNav()
+  res.render("./inventory/management", {
+    title: "Management",
+    nav,
+    errors: null,
+  })
+}
+
+invCont.buildAddClassificationView = async function(req, res, next){
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "Add Classification",
+    nav,
+    errors: null,
+  })
+}
+
+invCont.addClassification = async function(req, res){
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+  const addClassificationResult = await invModel.addClassification(classification_name)
+
+  if (addClassificationResult){
+    req.flash(
+      "notice",
+      `Congratulations, you\'re entered ${classification_name}`
+    )
+    res.status(201).render("./inventory/add-classification", {
+      title: "Add Classification",
+      nav,
+    })
+  }else{
+    req.flash("notice", "Sorry, adding classification failed.")
+    req.status(501).render("./inventory/add-classification",
+    {
+      title: "Add Classification",
+      nav,
+    })
+  }
 }
 
 module.exports = invCont
