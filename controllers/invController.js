@@ -91,7 +91,7 @@ invCont.buildAddInventoryView = async function(req, res, next){
   let nav = await utilities.getNav()
   let classification = await utilities.selectClassification()
   res.render("inventory/add-inventory",{
-    title: "Add Inventory InvController Build Add Inventory View",
+    title: "Add Inventory",
     nav,
     classification,
     errors: null,
@@ -131,7 +131,7 @@ invCont.addInventory = async function(req, res){
           `Congratulations, you\'ve entered ${inv_year} ${inv_make} ${inv_model}`
         )
         res.status(201).render("inventory/add-inventory", {
-          title: "Add Inventory - InvController if",
+          title: "Add Inventory",
           nav,
           classification,
           errors: null,
@@ -140,7 +140,7 @@ invCont.addInventory = async function(req, res){
         req.flash("notice", "Sorry, adding inventory failed.")
         req.status(501).render("inventory/add-inventory",
         {
-          title: "Add Inventory - InvController else",
+          title: "Add Inventory",
           nav,
           classification,
           errors: null,
