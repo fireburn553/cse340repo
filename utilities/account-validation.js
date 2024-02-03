@@ -70,7 +70,8 @@ validate.checkRegData = async (req, res, next) => {
     }
     next()
   }
-  validate.loginRules = () => {
+
+validate.loginRules = () => {
     return [
       // valid email is required and cannot already exist in the DB
       body("account_email")

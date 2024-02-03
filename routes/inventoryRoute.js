@@ -12,5 +12,7 @@ router.get("/error", util.handleErrors(invController.buildErrorPage))
 router.get("/", util.handleErrors(invController.buildManagementView));
 router.get("/classification", util.handleErrors(invController.buildAddClassificationView))
 router.post("/classification", addClassValidate.addClassificationRules(), addClassValidate.checkAddClassification,  util.handleErrors(invController.addClassification))
+router.get("/inventory", util.handleErrors(invController.buildAddInventoryView))
+router.post("/inventory", addClassValidate.addInventoryRules(), addClassValidate.checkAddInventory, util.handleErrors(invController.addInventory))
 
 module.exports = router;

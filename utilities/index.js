@@ -82,6 +82,21 @@ Util.buildInventoryDetailsGrid = async function(data){
   return grid
 }
 
+Util.selectClassification = async function (selectedClassificationId) {
+  let data = await invModel.getClassifications();
+  let select = '<label for="classification_id">Select Classification: </label>';
+  select += '<select id="classification_id" name="classification_id">';
+  data.rows.forEach((row) => {
+    select += '<option value="' + row.classification_id + '"';
+    if (row.classification_id == selectedClassificationId) {
+      select += ' selected';
+    }
+    select += '>' + row.classification_name + '</option>';
+  });
+  select += '</select>';
+  return select;
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
