@@ -98,7 +98,7 @@ validate.checkAddInventory = async (req, res, next) => {
         let nav = await utilities.getNav()
         res.render("./inventory/add-inventory", {
             errors,
-            title: "Add Inventory-management-validation",
+            title: "Add Inventory",
             nav,
             classification,
             inv_make, 
