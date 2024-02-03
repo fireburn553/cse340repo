@@ -186,6 +186,10 @@ div.first-content ul li{
   margin: 10px;
 }
 
+#inv-display li a{
+  margin: auto;
+}
+
 #inv-display li a img{
   max-width: 100%;
 }
