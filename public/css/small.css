@@ -248,7 +248,7 @@ div#details-page div.car-details{
 
 
 
-input[type=email], input[type=password], input[type=text] {
+input[type=email], input[type=password], input[type=number],input[type=text], select#classification_id, textarea#inv_description {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -256,6 +256,11 @@ input[type=email], input[type=password], input[type=text] {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+textarea#inv_description{
+  resize: none;
+  height: 200px;
 }
 
 button[type=submit], input[type=submit] {
