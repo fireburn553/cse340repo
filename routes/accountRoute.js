@@ -14,7 +14,7 @@ router.post("/register", regValidate.registationRules(), regValidate.checkRegDat
 // Process the login attempt
 router.post("/login", regValidate.loginRules(), regValidate.checkLoginData, util.handleErrors(accountController.accountLogin))
 // Route to account management view 
-router.get("/", util.handleErrors(accountController.account))
+router.get("/",util.checkLogin, util.handleErrors(accountController.account))
 
 
 module.exports = router;
