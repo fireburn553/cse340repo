@@ -10,12 +10,18 @@ router.get("/type/:classificationId", util.handleErrors(invController.buildByCla
 router.get("/detail/:inventoryId", util.handleErrors(invController.buildByInventoryId));
 router.get("/error", util.handleErrors(invController.buildErrorPage))
 router.get("/", util.handleErrors(invController.buildManagementView));
+
 router.get("/classification", util.handleErrors(invController.buildAddClassificationView))
 router.post("/classification", addClassValidate.addClassificationRules(), addClassValidate.checkAddClassification,  util.handleErrors(invController.addClassification))
+
 router.get("/inventory", util.handleErrors(invController.buildAddInventoryView))
 router.post("/inventory", addClassValidate.addInventoryRules(), addClassValidate.checkAddInventory, util.handleErrors(invController.addInventory))
 router.get("/getInventory/:classification_id", util.handleErrors(invController.getInventoryJSON))
+
 router.get("/edit/:inv_id", util.handleErrors(invController.buildEditInventoryView))
 router.post("/update/", addClassValidate.addInventoryRules(), addClassValidate.checkUpdateInventory, util.handleErrors(invController.updateInventory))
+
+router.get("/delete/:inv_id", util.handleErrors(invController.buildDeleteInventoryView))
+router.post("/delete/", util.handleErrors(invController.deleteInventory))
 
 module.exports = router;
