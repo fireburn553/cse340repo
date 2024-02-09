@@ -22,5 +22,5 @@ router.post("/update",  regValidate.updateAccountRules(), regValidate.checkUpdat
 
 router.post("/change", regValidate.updatePasswordRules(), regValidate.checkUpdateData, util.handleErrors(accountController.successUpdatePassword))
 
-router.get("/logout", util.handleErrors(accountController.logout))
+router.get("/logout",  util.checkLogin, util.handleErrors(accountController.logout))
 module.exports = router;
