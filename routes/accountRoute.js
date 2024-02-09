@@ -16,5 +16,9 @@ router.post("/login", regValidate.loginRules(), regValidate.checkLoginData, util
 // Route to account management view 
 router.get("/",util.checkLogin, util.handleErrors(accountController.account))
 
+router.get("/update", util.checkLogin, util.handleErrors(accountController.update))
 
+router.post("/update",  regValidate.updateAccountRules(), regValidate.checkUpdateData, util.handleErrors(accountController.successUpdateData))
+
+router.post("/changePassword", regValidate.updatePasswordRules(), regValidate.checkUpdateData, util.handleErrors(accountController.successUpdatePassword))
 module.exports = router;

@@ -9,6 +9,9 @@ const util = require("../utilities/")
 router.get("/type/:classificationId", util.handleErrors(invController.buildByClassificationId));
 router.get("/detail/:inventoryId", util.handleErrors(invController.buildByInventoryId));
 router.get("/error", util.handleErrors(invController.buildErrorPage))
+
+router.use(util.checkLogin)
+router.use(util.accountType)
 router.get("/", util.handleErrors(invController.buildManagementView));
 
 router.get("/classification", util.handleErrors(invController.buildAddClassificationView))
