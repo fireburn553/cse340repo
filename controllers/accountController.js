@@ -111,6 +111,10 @@ async function accountLogin(req, res) {
   }
  }
 
+ /* ****************************************
+ *  Account Management
+ * ************************************ */
+
 async function account (req, res){
   let nav = await utilities.getNav()
   let isLoggedIn = res.locals.loggedin
@@ -126,6 +130,10 @@ async function account (req, res){
   })
 }
 
+ /* ****************************************
+ *  Update account data process
+ * ************************************ */
+
 async function update (req, res) {
   let nav = await utilities.getNav()
   res.render("./account/update",{
@@ -139,13 +147,17 @@ async function update (req, res) {
   })
 }
 
+ /* ****************************************
+ *  Update account data success 
+ * ************************************ */
+
 async function successUpdateData (req, res) {
   let nav = await utilities.getNav()
   const{ account_firstname, account_lastname, account_email, account_id } = req.body
   const updateResult = await accountModel.updateAccount(account_firstname, account_lastname, account_email, account_id)
   let updatedAccessToken = ""
   if (updateResult) {
-    const updatedAccountData = await accountModel.getAccountByEmail(account_email)
+    const updatedAccountData = await accountModel.getAccountById(account_id)
     delete updatedAccountData.account_password
     updatedAccessToken = jwt.sign(updatedAccountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 });
     res.cookie("jwt", updatedAccessToken, { httpOnly: true, maxAge: 3600 * 1000 })
@@ -165,6 +177,9 @@ async function successUpdateData (req, res) {
   }
 }
 
+ /* ****************************************
+ *  Update password data success 
+ * ************************************ */
 async function successUpdatePassword (req, res) {
   let nav= await utilities.getNav()
   const { account_firstname, account_lastname, account_email} = req.body
