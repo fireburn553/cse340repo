@@ -221,6 +221,11 @@ async function successUpdatePassword (req, res) {
     }
 }
 
+async function logout(req, res) {
+  res.clearCookie('jwt');
+  res.redirect('/');
+}
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, account, update, successUpdateData, successUpdatePassword }
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, account, update, successUpdateData, successUpdatePassword, logout }
 
