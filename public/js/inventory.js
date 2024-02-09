@@ -28,7 +28,7 @@ function buildInventoryList(data) {
     let inventoryDisplay = document.getElementById("inventoryDisplay"); 
     // Set up the table labels 
     let dataTable = '<thead>'; 
-    dataTable += '<tr><th>Vehicle Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
+    dataTable += '<tr><th><h3>Vehicle Name</h3></th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
     dataTable += '</thead>'; 
     // Set up the table body 
     dataTable += '<tbody>'; 
@@ -36,8 +36,8 @@ function buildInventoryList(data) {
     data.forEach(function (element) { 
      console.log(element.inv_id + ", " + element.inv_model); 
      dataTable += `<tr><td>${element.inv_make} ${element.inv_model}</td>`; 
-     dataTable += `<td><a href='/inv/edit/${element.inv_id}' title='Click to update'>Modify</a></td>`; 
-     dataTable += `<td><a href='/inv/delete/${element.inv_id}' title='Click to delete'>Delete</a></td></tr>`; 
+     dataTable += `<td><a id="modify-button" href='/inv/edit/${element.inv_id}' title='Click to update'>Modify</a></td>`; 
+     dataTable += `<td><a id="delete-button" href='/inv/delete/${element.inv_id}' title='Click to delete'>Delete</a></td></tr>`; 
     }) 
     dataTable += '</tbody>'; 
     // Display the contents in the Inventory Management view 

@@ -86,7 +86,7 @@ Util.buildInventoryDetailsGrid = async function(data){
 
 Util.selectClassification = async function (selectedClassificationId) {
   let data = await invModel.getClassifications();
-  let select = '<label for="classification_id">Select Classification: </label>';
+  let select = '<label for="classification_id">Select Classification: </label><br>';
   select += '<select id="classification_id" name="classification_id">';
   data.rows.forEach((row) => {
     select += '<option value="' + row.classification_id + '"';
@@ -158,8 +158,8 @@ Util.checkAccountType =(isLoggedIn, accountType) => {
   let managementGrid
   
   if (isLoggedIn && (accountType === "Admin" || accountType === "Employee")) {
-    managementGrid = '<h3> Inventory Management </h3>'
-    managementGrid += '<a href="../../inv/" title="Inventory Management View ">Manage Inventory</a>'
+    managementGrid = '<h2> Inventory Management </h2>'
+    managementGrid += '<a id="inv-management-button" href="../../inv/" title="Inventory Management View "><h3>Manage Inventory</h3></a>'
   }else{
     managementGrid = ''
   }
