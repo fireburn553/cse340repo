@@ -20,5 +20,5 @@ router.get("/update", util.checkLogin, util.handleErrors(accountController.updat
 
 router.post("/update",  regValidate.updateAccountRules(), regValidate.checkUpdateData, util.handleErrors(accountController.successUpdateData))
 
-router.post("/changePassword", regValidate.updatePasswordRules(), regValidate.checkUpdateData, util.handleErrors(accountController.successUpdatePassword))
+router.post("/change", regValidate.updatePasswordRules(), regValidate.checkUpdateData, util.handleErrors(accountController.successUpdatePassword))
 module.exports = router;
