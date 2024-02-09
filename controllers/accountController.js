@@ -97,7 +97,7 @@ async function accountLogin(req, res) {
    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
    return res.redirect("/account/")
-   }else {
+   } else {
     req.flash('notice', 'Incorrect password. Please try again.');
     res.status(400).render('account/login', {
       title: 'Login',
@@ -113,12 +113,58 @@ async function accountLogin(req, res) {
 
 async function account (req, res){
   let nav = await utilities.getNav()
+  let isLoggedIn = res.locals.loggedin
+  let accountType = res.locals.accountData.account_type
+  let checkAccountType = utilities.checkAccountType(isLoggedIn, accountType)
+  
   res.render("./account/account", {
-    title: "Account",
+    title: "Account Management",
     nav,
+    accountType,
+    checkAccountType,
     errors:null,
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, account }
+async function update (req, res) {
+  let nav = await utilities.getNav()
+  res.render("./account/update",{
+    title: "Edit Account",
+    nav,
+    errors:null,
+    account_id: res.locals.accountData.account_id,
+    account_firstname: res.locals.accountData.account_firstname,
+    account_lastname: res.locals.accountData.account_lastname,
+    account_email: res.locals.accountData.account_email,
+  })
+}
+
+async function successUpdateData (req, res) {
+  let nav = await utilities.getNav()
+  const{ account_firstname, account_lastname, account_email, account_id } = req.body
+  const updateResult = await accountModel.updateAccount(account_firstname, account_lastname, account_email, account_id)
+  let updatedAccessToken = ""
+  if (updateResult) {
+    const updatedAccountData = await accountModel.getAccountByEmail(account_email)
+    delete updatedAccountData.account_password
+    updatedAccessToken = jwt.sign(updatedAccountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 });
+    res.cookie("jwt", updatedAccessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+    req.flash("notice", `Congratulations, your information has been updated.`)
+    res.redirect("/account/")
+  }else{
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("./account/update", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+      account_firstname, 
+      account_lastname, 
+      account_email, 
+      account_id,
+    })
+  }
+}
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, account, update, successUpdateData }
 

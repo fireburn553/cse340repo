@@ -139,4 +139,34 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+/* ****************************************
+ *  Check Type
+ * ************************************ */
+Util.accountType = (req, res, next) => {
+  console.log(res.locals.accountData.account_type)
+  if (res.locals.accountData.account_type === "Admin" || res.locals.accountData.account_type === "Employee") {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+  /* ****************************************
+ *  Check Type
+ * ************************************ */
+
+Util.checkAccountType =(isLoggedIn, accountType) => {
+  console.log("Check Account Type")
+  console.log(isLoggedIn)
+  console.log(accountType)
+  let managementGrid
+  
+  if (isLoggedIn && (accountType === "Admin" || accountType === "Employee")) {
+    managementGrid = '<h3> Inventory Management </h3>'
+    managementGrid += '<a href="../../inv/" title="Inventory Management View ">Manage Inventory</a>'
+  }else{
+    managementGrid = ''
+  }
+  return managementGrid
+}
 module.exports = Util
