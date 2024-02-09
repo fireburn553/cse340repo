@@ -143,7 +143,6 @@ Util.checkJWTToken = (req, res, next) => {
  *  Check Type
  * ************************************ */
 Util.accountType = (req, res, next) => {
-  console.log(res.locals.accountData.account_type)
   if (res.locals.accountData.account_type === "Admin" || res.locals.accountData.account_type === "Employee") {
     next()
   } else {
@@ -156,9 +155,6 @@ Util.accountType = (req, res, next) => {
  * ************************************ */
 
 Util.checkAccountType =(isLoggedIn, accountType) => {
-  console.log("Check Account Type")
-  console.log(isLoggedIn)
-  console.log(accountType)
   let managementGrid
   
   if (isLoggedIn && (accountType === "Admin" || accountType === "Employee")) {

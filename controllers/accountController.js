@@ -165,6 +165,47 @@ async function successUpdateData (req, res) {
   }
 }
 
+async function successUpdatePassword (req, res) {
+  let nav= await utilities.getNav()
+  const { account_firstname, account_lastname, account_email} = req.body
+  const account_password = req.body.account_password
+  const account_id = res.locals.accountData.account_id
+  
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the registration.')
+    res.status(500).render("./account/update", {
+      title: "Edit Account",
+      nav,
+      errors:null,
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email,
+    })}
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, account, update, successUpdateData }
+    const passwordUpdateResult = await accountModel.changePassword(hashedPassword, account_id)
+
+    if (passwordUpdateResult){
+      req.flash("notice", `Congratulations, your password has been updated`)
+      res.redirect("/account/")
+    }else{
+      req.flash("notice", "Sorry, the change password failed.")
+      res.status(501).render("./account/update",{
+        title: "Edit Account",
+        nav,
+        errors:null,
+        account_id,
+        account_firstname,
+        account_lastname,
+        account_email,
+      })
+    }
+}
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, account, update, successUpdateData, successUpdatePassword }
 
