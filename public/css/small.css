@@ -303,14 +303,14 @@ ul.notice{
   font-weight: bold;
 }
 
-a#classification-button,a#inventory-button, a#edit-info-button, a#inv-management-button{
+a#classification-button,a#inventory-button, a#edit-info-button, a#inv-management-button, a#approval-button, a#approval-button1{
   text-decoration: none;
   margin: 10px auto;
   width: 50%;
   display: block;
 }
 
-a#classification-button h2, a#inventory-button h2, a#edit-info-button h3, a#inv-management-button h3{
+a#classification-button h2, a#inventory-button h2, a#edit-info-button h3, a#inv-management-button h3, a#approval-button h2, a#approval-button1 h2{
   text-align: center;
   background-color: #365486;
   color: white;
@@ -321,18 +321,18 @@ a#classification-button h2, a#inventory-button h2, a#edit-info-button h3, a#inv-
   cursor: pointer;
 }
 
-a#classification-button h2:hover,a#inventory-button h2:hover, a#edit-info-button h3:hover,  a#inv-management-button h3:hover{
+a#classification-button h2:hover,a#inventory-button h2:hover, a#edit-info-button h3:hover,  a#inv-management-button h3:hover, a#approval-button h2:hover, a#approval-button1 h2:hover{
   background-color: #ffffff;
   color: #365486;
   border: 1px solid #365486;
 }
 
-table#inventoryDisplay{
+table#inventoryDisplay, table#unapprovedClassification, table#unapprovedInventory{
   
   margin: auto;
 }
 
-a#modify-button, a#delete-button{
+a#modify-button, a#delete-button, a#approved-button, a#reject-button, a#approved-button1, a#reject-button1{
   text-decoration: none;
   margin: 10px auto;
   width: 100%;
@@ -347,7 +347,7 @@ a#modify-button, a#delete-button{
   cursor: pointer;
 }
 
-a#modify-button:hover, a#delete-button:hover{
+a#modify-button:hover, a#delete-button:hover, a#approved-button:hover, a#reject-button:hover, a#approved-button1:hover, a#reject-button1:hover{
   background-color: #ffffff;
   color: #365486;
 
