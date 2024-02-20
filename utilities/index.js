@@ -84,6 +84,22 @@ Util.buildInventoryDetailsGrid = async function(data){
   return grid
 }
 
+Util.selectAllClassification = async function (selectedClassificationId) {
+  console.log("Select All Classification")
+  let data = await invModel.getAllClassifications();
+  let select = '<label for="classification_id">Select Classification: </label><br>';
+  select += '<select id="classification_id" name="classification_id">';
+  data.rows.forEach((row) => {
+    select += '<option value="' + row.classification_id + '"';
+    if (row.classification_id == selectedClassificationId) {
+      select += ' selected';
+    }
+    select += '>' + row.classification_name + '</option>';
+  });
+  select += '</select>';
+  return select;
+}
+
 Util.selectClassification = async function (selectedClassificationId) {
   let data = await invModel.getClassifications();
   let select = '<label for="classification_id">Select Classification: </label><br>';
@@ -165,4 +181,49 @@ Util.checkAccountType =(isLoggedIn, accountType) => {
   }
   return managementGrid
 }
+
+//util.js
+
+Util.buildUnapprovedClassificationList = async function(data) { 
+
+  // Set up the table labels 
+  let dataTable = '<thead>'; 
+  dataTable += '<tr><th><h3>Classification Name</h3></th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
+  dataTable += '</thead>'; 
+  // Set up the table body 
+  dataTable += '<tbody>'; 
+  // Iterate over all vehicles in the array and put each in a row 
+  data.forEach(function (element) { 
+    dataTable += `<tr><td>${element.classification_name}</td>`; 
+    dataTable += `<td><a id="approved-button" href='/inv/approved/${element.classification_id}' title='Click to Approve'>Approve</a></td>`; 
+    dataTable += `<td><a id="reject-button" href='/inv/deleteClass/${element.classification_id}' title='Click to Reject'>Reject</a></td>`; 
+    dataTable += `<td><input type="hidden" name="classification_id" value="${element.classification_id}"></td></tr>`
+  }) 
+  dataTable += '</tbody>'; 
+  // Display the contents in the Inventory Management view 
+  return dataTable;
+}
+
+
+  // Build inventory items into HTML table components and inject into DOM 
+Util.buildUnapprovedInventoryList = async function(data) { 
+  // Set up the table labels 
+  let dataTable = '<thead>'; 
+  dataTable += '<tr><th><h3>Classification Name</h3></th><th><h3>Vehicle Name</h3></th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
+  dataTable += '</thead>'; 
+  // Set up the table body 
+  dataTable += '<tbody>'; 
+  // Iterate over all vehicles in the array and put each in a row 
+  data.forEach(function (element) { 
+   dataTable += `<tr><td>${element.classification_name}</td>`
+   dataTable += `<td>${element.inv_make} ${element.inv_model}</td>`; 
+   dataTable += `<td><a id="approved-button" href='/inv/approvedInv/${element.inv_id}' title='Click to Approved'>Approved</a></td>`; 
+   dataTable += `<td><a id="reject-button" href='/inv/delete/${element.inv_id}' title='Click to Reject'>Reject</a></td>`; 
+   dataTable += `<td><input type="hidden" name="classification_id" value="${element.classification_id}"></td></tr>`
+  }) 
+  dataTable += '</tbody>'; 
+  // Display the contents in the Inventory Management view 
+  return dataTable; 
+ }
+
 module.exports = Util

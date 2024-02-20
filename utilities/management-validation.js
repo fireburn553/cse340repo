@@ -91,7 +91,7 @@ validate.checkAddClassification = async (req, res, next) => {
 
 validate.checkAddInventory = async (req, res, next) => {
     const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles,  inv_color, classification_id} = req.body
-    let classification = await utilities.selectClassification(classification_id)
+    let classification = await utilities.selectAllClassification(classification_id)
     let errors = []
     errors = validationResult(req)
     if(!errors.isEmpty()){
