@@ -31,5 +31,7 @@ router.get("/unapproved", util.handleErrors(invController.buildUnapprovedView));
 router.get("/approved/:classification_id", util.handleErrors(invController.buildClassificationApprovedView));
 router.post("/approvedClassification", util.handleErrors(invController.approvedClassification))
 
+router.get("/deleteClass/:classification_id", util.handleErrors(invController.buildDeleteClassificationView))
+router.post("/deleteClassification/", util.handleErrors(invController.rejectClassification))
 
 module.exports = router;

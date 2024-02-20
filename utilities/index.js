@@ -180,7 +180,7 @@ Util.buildUnapprovedClassificationList = async function(data) {
   data.forEach(function (element) { 
     dataTable += `<tr><td>${element.classification_name}</td>`; 
     dataTable += `<td><a id="approved-button" href='/inv/approved/${element.classification_id}' title='Click to Approve'>Approve</a></td>`; 
-    dataTable += `<td><a id="reject-button" href='#' title='Click to Reject'>Reject</a></td>`; 
+    dataTable += `<td><a id="reject-button" href='/inv/deleteClass/${element.classification_id}' title='Click to Reject'>Reject</a></td>`; 
     dataTable += `<td><input type="hidden" name="classification_id" value="${element.classification_id}"></td></tr>`
   }) 
   dataTable += '</tbody>'; 

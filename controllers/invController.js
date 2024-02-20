@@ -329,6 +329,31 @@ invCont.approvedClassification = async function(req, res){
   }
 }
 
+invCont.buildDeleteClassificationView = async function(req, res){
+  const classification_id = parseInt(req.params.classification_id);
+  let nav = await utilities.getNav()
+  const classificationData = await invModel.getDetailsByClassificationId(classification_id)
+  res.render("./inventory/delete-classification", {
+    title: "Reject Classification",
+    nav,
+    classificationName: classificationData[0].classification_name,
+    classificationId: classificationData[0].classification_id,
+    errors: null,
+  })
+}
+
+invCont.rejectClassification = async function(req, res){
+  const classification_id = req.body.classification_id;
+  const updateResult = await invModel.deleteClassification(classification_id);
+  if (updateResult) {
+    req.flash("notice", `The classification was rejected`);
+    res.redirect("/inv/unapproved");
+  } else {
+    req.flash("notice", "Sorry, the rejected failed.");
+    res.redirect("/inv/unapproved");
+  }
+}
+
 invCont.buildInventoryApprovedView = async function(req, res){
   const classification_id = parseInt(req.params.classification_id);
   let nav = await utilities.getNav()
@@ -355,6 +380,7 @@ invCont.approvedInventory = async function(req, res){
     res.redirect("/inv/unapproved");
   }
 }
+
 
 
 module.exports = invCont
