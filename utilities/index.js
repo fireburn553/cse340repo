@@ -85,6 +85,7 @@ Util.buildInventoryDetailsGrid = async function(data){
 }
 
 Util.selectAllClassification = async function (selectedClassificationId) {
+  console.log("Select All Classification")
   let data = await invModel.getAllClassifications();
   let select = '<label for="classification_id">Select Classification: </label><br>';
   select += '<select id="classification_id" name="classification_id">';

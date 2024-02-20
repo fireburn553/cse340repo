@@ -35,7 +35,7 @@ async function getDetailsByInventoryId(inventory_id) {
       `SELECT * FROM public.inventory AS i 
       JOIN public.classification AS c 
       ON i.classification_id = c.classification_id 
-      WHERE inv_id = $1 AND inv_approved = true`,
+      WHERE inv_id = $1`,
       [inventory_id]
     )
     return data.rows
@@ -189,7 +189,6 @@ async function approvedInventory(account_id, inv_id) {
   try {
     const sql = "UPDATE public.inventory SET inv_approved = true, account_id = $1, inv_approved_date = current_timestamp WHERE inv_id = $2";
     const data = await pool.query(sql, [account_id, inv_id]);
-    console.log(data)
     return data.rowCount;
   } catch (error) {
     console.error("Error updating inventory: ", error);
