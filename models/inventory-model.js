@@ -7,6 +7,10 @@ async function getClassifications(){
   return await pool.query("SELECT DISTINCT ON (cl.classification_name) cl.classification_id,cl.classification_name, i.* classification_name FROM public.classification AS cl JOIN public.inventory AS i ON i.classification_id = cl.classification_id WHERE cl.classification_approved = true AND i.inv_approved = true ORDER BY classification_name")
 }
 
+
+async function getAllClassifications(){
+  return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
+}
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
@@ -194,4 +198,4 @@ async function approvedInventory(account_id, inv_id) {
 }
 
 
-module.exports = {approvedInventory, getUnapprovedInventoryById, deleteClassification, getDetailsByClassificationId, approvedClassification, getUnapprovedInventory, getUnapprovedClassifications, getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassification, checkExistingClassification, addInventory, updateInventory, deleteInventory}
+module.exports = {getAllClassifications, approvedInventory, getUnapprovedInventoryById, deleteClassification, getDetailsByClassificationId, approvedClassification, getUnapprovedInventory, getUnapprovedClassifications, getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassification, checkExistingClassification, addInventory, updateInventory, deleteInventory}
