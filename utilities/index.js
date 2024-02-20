@@ -188,7 +188,7 @@ Util.buildUnapprovedClassificationList = async function(data) {
 
   // Set up the table labels 
   let dataTable = '<thead>'; 
-  dataTable += '<tr><th><h3>Classification Name</h3></th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
+  dataTable += '<tr><th>Classification Name</th><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
   dataTable += '</thead>'; 
   // Set up the table body 
   dataTable += '<tbody>'; 
@@ -209,7 +209,7 @@ Util.buildUnapprovedClassificationList = async function(data) {
 Util.buildUnapprovedInventoryList = async function(data) { 
   // Set up the table labels 
   let dataTable = '<thead>'; 
-  dataTable += '<tr><th><h3>Classification Name</h3></th><th><h3>Vehicle Name</h3></th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
+  dataTable += '<tr><th>Classification Name</th><th>Vehicle Name</th><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
   dataTable += '</thead>'; 
   // Set up the table body 
   dataTable += '<tbody>'; 
@@ -217,8 +217,8 @@ Util.buildUnapprovedInventoryList = async function(data) {
   data.forEach(function (element) { 
    dataTable += `<tr><td>${element.classification_name}</td>`
    dataTable += `<td>${element.inv_make} ${element.inv_model}</td>`; 
-   dataTable += `<td><a id="approved-button" href='/inv/approvedInv/${element.inv_id}' title='Click to Approved'>Approved</a></td>`; 
-   dataTable += `<td><a id="reject-button" href='/inv/delete/${element.inv_id}' title='Click to Reject'>Reject</a></td>`; 
+   dataTable += `<td><a id="approved-button1" href='/inv/approvedInv/${element.inv_id}' title='Click to Approved'>Approved</a></td>`; 
+   dataTable += `<td><a id="reject-button1" href='/inv/delete/${element.inv_id}' title='Click to Reject'>Reject</a></td>`; 
    dataTable += `<td><input type="hidden" name="classification_id" value="${element.classification_id}"></td></tr>`
   }) 
   dataTable += '</tbody>'; 
