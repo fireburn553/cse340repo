@@ -4,7 +4,7 @@ const pool = require("../database/")
  *  Get all classification data
  * ************************** */
 async function getClassifications(){
-  return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
+  return await pool.query("SELECT * FROM public.classification WHERE classification_approved = true ORDER BY classification_name")
 }
 
 /* ***************************
@@ -16,7 +16,7 @@ async function getInventoryByClassificationId(classification_id) {
       `SELECT * FROM public.inventory AS i 
       JOIN public.classification AS c 
       ON i.classification_id = c.classification_id 
-      WHERE i.classification_id = $1`,
+      WHERE i.inv_approved = true AND i.classification_id = $1`,
       [classification_id]
     )
     return data.rows
@@ -31,7 +31,7 @@ async function getDetailsByInventoryId(inventory_id) {
       `SELECT * FROM public.inventory AS i 
       JOIN public.classification AS c 
       ON i.classification_id = c.classification_id 
-      WHERE inv_id = $1`,
+      WHERE inv_id = $1 AND inv_approved = true`,
       [inventory_id]
     )
     return data.rows
@@ -117,4 +117,48 @@ async function deleteInventory(inv_id) {
     new Error("Delete Inventory Error")
   }
 }
-module.exports = {getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassification, checkExistingClassification, addInventory, updateInventory, deleteInventory}
+
+// Add new functions in inventory-model.js
+async function getUnapprovedClassifications() {
+  try{
+    const sql = "SELECT * FROM public.classification WHERE classification_approved = false";
+    const data = await pool.query(sql);
+    return data.rows;
+  }catch (error){
+    new Error("Unapproved Classification Error")
+  }
+
+}
+
+async function getUnapprovedInventory() {
+  try{
+    const sql = "SELECT * FROM public.inventory AS i JOIN public.classification AS c ON i.classification_id = c.classification_id   WHERE inv_approved = false AND classification_approved = true ORDER BY c.classification_name";
+    const data = await pool.query(sql);
+    return data.rows;
+  }catch (error){
+    new Error("Unapproved Inventory Error")
+  }
+}
+
+async function approvedClassification(account_id, classification_id) {
+  try {
+    const sql = "UPDATE public.classification SET classification_approved = true, account_id = $1, classification_approval_date = current_timestamp WHERE classification_id = $2";
+    const data = await pool.query(sql, [account_id, classification_id]);
+    return data.rowCount;
+  } catch (error) {
+    console.error("Error updating classification: ", error);
+    throw error; // Re-throw the error to be caught by the error handler
+  }
+}
+
+async function getDetailsByClassificationId(classification_id){
+  try{
+    const sql = "SELECT * FROM classification WHERE classification_id = $1 AND classification_approved = false"
+    const classficationData = await pool.query(sql, [classification_id])
+    return classficationData.rows
+  }catch (error) {
+    return error.message
+  }
+}
+
+module.exports = {getDetailsByClassificationId, approvedClassification, getUnapprovedInventory, getUnapprovedClassifications, getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassification, checkExistingClassification, addInventory, updateInventory, deleteInventory}

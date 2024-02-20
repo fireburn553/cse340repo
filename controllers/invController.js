@@ -35,7 +35,6 @@ invCont.buildErrorPage = async function (req, res, next){
   const inventory_id = req.params.inventoryId
   const data = await invModel.getDetailsByInventoryId(inventory_id)
   const grid = await utilities.buildInventoryDetailsGrid(data)
-  //let nav = await utilities.getNav()
   res.render("./inventory/details", {
     title:" ",
     nav,
@@ -66,6 +65,7 @@ invCont.buildAddClassificationView = async function(req, res, next){
 invCont.addClassification = async function(req, res){
   const { classification_name } = req.body
   const addClassificationResult = await invModel.addClassification(classification_name)
+  let classification = await utilities.selectClassification()
   let nav = await utilities.getNav()
   
   if (addClassificationResult){
@@ -76,6 +76,7 @@ invCont.addClassification = async function(req, res){
     res.status(201).render("inventory/management", {
       title: "Add Classification",
       nav,
+      classification,
       errors: null,
     })
   }else{
@@ -84,6 +85,7 @@ invCont.addClassification = async function(req, res){
     {
       title: "Add Classification",
       nav,
+      classification,
       errors: null,
     })
   }
@@ -277,6 +279,83 @@ invCont.deleteInventory = async function(req, res){
     res.redirect("/inv/delete/{inv_id}")
   }
 }
+
+invCont.buildUnapprovedView = async function(req, res) {
+  try {
+    let nav = await utilities.getNav()
+    const unapprovedClassifications = await invModel.getUnapprovedClassifications();
+    const unapprovedInventory = await invModel.getUnapprovedInventory();
+    const unapprovedClass = await utilities.buildUnapprovedClassificationList(unapprovedClassifications);
+    const unapprovedInv = await utilities.buildUnapprovedInventoryList(unapprovedInventory);
+    // Render a page showing unapproved classifications and inventory items
+    res.render("./inventory/unapproved", {
+      title: "Approval Management ",
+      nav,
+      unapprovedClass,
+      unapprovedInv,
+      errors: null,
+      
+    })
+  } catch (error) {
+    console.error("Error building unapproved view: ", error);
+    res.render('error', { error });
+  }
+}
+
+invCont.buildClassificationApprovedView = async function(req, res){
+  const classification_id = parseInt(req.params.classification_id);
+  let nav = await utilities.getNav()
+  const classificationData = await invModel.getDetailsByClassificationId(classification_id)
+  res.render("./inventory/approved-classification", {
+    title: "Approved Classification",
+    nav,
+    classificationName: classificationData[0].classification_name,
+    classificationId: classificationData[0].classification_id,
+    errors: null,
+  })
+}
+
+invCont.approvedClassification = async function(req, res){
+  const classification_id = req.body.classification_id;
+  
+  const account_id = res.locals.accountData.account_id;
+  const updateResult = await invModel.approvedClassification(account_id, classification_id);
+  if (updateResult) {
+    req.flash("notice", `The classification was approved`);
+    res.redirect("/inv/unapproved");
+  } else {
+    req.flash("notice", "Sorry, the approval failed.");
+    res.redirect("/inv/unapproved");
+  }
+}
+
+invCont.buildInventoryApprovedView = async function(req, res){
+  const classification_id = parseInt(req.params.classification_id);
+  let nav = await utilities.getNav()
+  const classificationData = await invModel.getDetailsByClassificationId(classification_id)
+  res.render("./inventory/approved-classification", {
+    title: "Approved Classification",
+    nav,
+    classificationName: classificationData[0].classification_name,
+    classificationId: classificationData[0].classification_id,
+    errors: null,
+  })
+}
+
+invCont.approvedInventory = async function(req, res){
+  const classification_id = req.body.classification_id;
+  
+  const account_id = res.locals.accountData.account_id;
+  const updateResult = await invModel.approvedClassification(account_id, classification_id);
+  if (updateResult) {
+    req.flash("notice", `The classification was approved`);
+    res.redirect("/inv/unapproved");
+  } else {
+    req.flash("notice", "Sorry, the approval failed.");
+    res.redirect("/inv/unapproved");
+  }
+}
+
 
 module.exports = invCont
 

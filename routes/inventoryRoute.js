@@ -27,4 +27,9 @@ router.post("/update/", addClassValidate.addInventoryRules(), addClassValidate.c
 router.get("/delete/:inv_id", util.handleErrors(invController.buildDeleteInventoryView))
 router.post("/delete/", util.handleErrors(invController.deleteInventory))
 
+router.get("/unapproved", util.handleErrors(invController.buildUnapprovedView));
+router.get("/approved/:classification_id", util.handleErrors(invController.buildClassificationApprovedView));
+router.post("/approvedClassification", util.handleErrors(invController.approvedClassification))
+
+
 module.exports = router;

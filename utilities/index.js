@@ -165,4 +165,49 @@ Util.checkAccountType =(isLoggedIn, accountType) => {
   }
   return managementGrid
 }
+
+//util.js
+
+Util.buildUnapprovedClassificationList = async function(data) { 
+
+  // Set up the table labels 
+  let dataTable = '<thead>'; 
+  dataTable += '<tr><th><h3>Classification Name</h3></th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
+  dataTable += '</thead>'; 
+  // Set up the table body 
+  dataTable += '<tbody>'; 
+  // Iterate over all vehicles in the array and put each in a row 
+  data.forEach(function (element) { 
+    dataTable += `<tr><td>${element.classification_name}</td>`; 
+    dataTable += `<td><a id="approved-button" href='/inv/approved/${element.classification_id}' title='Click to Approve'>Approve</a></td>`; 
+    dataTable += `<td><a id="reject-button" href='#' title='Click to Reject'>Reject</a></td>`; 
+    dataTable += `<td><input type="hidden" name="classification_id" value="${element.classification_id}"></td></tr>`
+  }) 
+  dataTable += '</tbody>'; 
+  // Display the contents in the Inventory Management view 
+  return dataTable;
+}
+
+
+  // Build inventory items into HTML table components and inject into DOM 
+Util.buildUnapprovedInventoryList = async function(data) { 
+  // Set up the table labels 
+  let dataTable = '<thead>'; 
+  dataTable += '<tr><th><h3>Classification Name</h3></th><th><h3>Vehicle Name</h3></th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
+  dataTable += '</thead>'; 
+  // Set up the table body 
+  dataTable += '<tbody>'; 
+  // Iterate over all vehicles in the array and put each in a row 
+  data.forEach(function (element) { 
+   dataTable += `<tr><td>${element.classification_name}</td>`
+   dataTable += `<td>${element.inv_make} ${element.inv_model}</td>`; 
+   dataTable += `<td><a id="approved-button" href='#' title='Click to Approved'>Approved</a></td>`; 
+   dataTable += `<td><a id="reject-button" href='#' title='Click to Reject'>Reject</a></td>`; 
+   dataTable += `<td><input type="hidden" name="classification_id" value="${element.classification_id}"></td></tr>`
+  }) 
+  dataTable += '</tbody>'; 
+  // Display the contents in the Inventory Management view 
+  return dataTable; 
+ }
+
 module.exports = Util
