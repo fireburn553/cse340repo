@@ -28,10 +28,14 @@ router.get("/delete/:inv_id", util.handleErrors(invController.buildDeleteInvento
 router.post("/delete/", util.handleErrors(invController.deleteInventory))
 
 router.get("/unapproved", util.handleErrors(invController.buildUnapprovedView));
+
 router.get("/approved/:classification_id", util.handleErrors(invController.buildClassificationApprovedView));
 router.post("/approvedClassification", util.handleErrors(invController.approvedClassification))
 
 router.get("/deleteClass/:classification_id", util.handleErrors(invController.buildDeleteClassificationView))
 router.post("/deleteClassification/", util.handleErrors(invController.rejectClassification))
+
+router.get("/approvedInv/:inv_id", util.handleErrors(invController.buildInventoryApprovedView))
+router.post("/approvedInv", util.handleErrors(invController.approvedInventory))
 
 module.exports = router;

@@ -370,8 +370,7 @@ div.select-classification{
     display: block;
 }
 
-#unapprovedInventory > tbody > tr > td:nth-child(5){
+#unapprovedInventory > tbody > tr > td:nth-child(5), #unapprovedClassification > tbody > tr > td:nth-child(4)  {
   background-color: white;
 }
-
 /* Footer */

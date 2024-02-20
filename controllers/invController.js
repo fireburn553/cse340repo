@@ -355,25 +355,24 @@ invCont.rejectClassification = async function(req, res){
 }
 
 invCont.buildInventoryApprovedView = async function(req, res){
-  const classification_id = parseInt(req.params.classification_id);
+  const inv_id = parseInt(req.params.inv_id);
   let nav = await utilities.getNav()
-  const classificationData = await invModel.getDetailsByClassificationId(classification_id)
-  res.render("./inventory/approved-classification", {
-    title: "Approved Classification",
+  const invData = await invModel.getUnapprovedInventoryById(inv_id)
+  res.render("./inventory/approved-inventory", {
+    title: "Approved Inventory",
     nav,
-    classificationName: classificationData[0].classification_name,
-    classificationId: classificationData[0].classification_id,
+    invData,
     errors: null,
   })
 }
 
 invCont.approvedInventory = async function(req, res){
-  const classification_id = req.body.classification_id;
-  
+  const inv_id = req.body.inv_id;
+  console.log(inv_id)
   const account_id = res.locals.accountData.account_id;
-  const updateResult = await invModel.approvedClassification(account_id, classification_id);
+  const updateResult = await invModel.approvedInventory(account_id, inv_id);
   if (updateResult) {
-    req.flash("notice", `The classification was approved`);
+    req.flash("notice", `The vehicle was approved`);
     res.redirect("/inv/unapproved");
   } else {
     req.flash("notice", "Sorry, the approval failed.");

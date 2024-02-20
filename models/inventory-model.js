@@ -4,7 +4,7 @@ const pool = require("../database/")
  *  Get all classification data
  * ************************** */
 async function getClassifications(){
-  return await pool.query("SELECT * FROM public.classification WHERE classification_approved = true ORDER BY classification_name")
+  return await pool.query("SELECT DISTINCT ON (cl.classification_name) cl.classification_id,cl.classification_name, i.* classification_name FROM public.classification AS cl JOIN public.inventory AS i ON i.classification_id = cl.classification_id WHERE cl.classification_approved = true AND i.inv_approved = true ORDER BY classification_name")
 }
 
 /* ***************************
@@ -171,5 +171,27 @@ async function deleteClassification(classification_id){
   }
 }
 
+async function getUnapprovedInventoryById(inv_id) {
+  try{
+    const sql = "SELECT * FROM public.inventory AS i JOIN public.classification AS c ON i.classification_id = c.classification_id WHERE inv_id = $1";
+    const data = await pool.query(sql, [inv_id]);
+    return data.rows[0];
+  }catch (error){
+    new Error("Unapproved Inventory Error")
+  }
+}
 
-module.exports = {deleteClassification, getDetailsByClassificationId, approvedClassification, getUnapprovedInventory, getUnapprovedClassifications, getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassification, checkExistingClassification, addInventory, updateInventory, deleteInventory}
+async function approvedInventory(account_id, inv_id) {
+  try {
+    const sql = "UPDATE public.inventory SET inv_approved = true, account_id = $1, inv_approved_date = current_timestamp WHERE inv_id = $2";
+    const data = await pool.query(sql, [account_id, inv_id]);
+    console.log(data)
+    return data.rowCount;
+  } catch (error) {
+    console.error("Error updating inventory: ", error);
+    throw error;
+  }
+}
+
+
+module.exports = {approvedInventory, getUnapprovedInventoryById, deleteClassification, getDetailsByClassificationId, approvedClassification, getUnapprovedInventory, getUnapprovedClassifications, getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassification, checkExistingClassification, addInventory, updateInventory, deleteInventory}
